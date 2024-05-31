@@ -1,0 +1,26 @@
+datasource db {
+    provider = "mongodb"
+    url      = "mongodb+srv://yassine:yassine@cluster0.w3gedzs.mongodb.net/<database_name>?retryWrites=true&w=majority"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+    firstName          String
+    lastName           String
+    email              String   @unique
+    email_verification Boolean? @default(false)
+    // emailVerified DateTime?
+    password           String
+    image              String?
+    // Additional fields
+    phone              String
+    credits            Int      @default(0)
+    address            String?
+    role               String   @default("Member")
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
+}
